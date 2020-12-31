@@ -5,14 +5,25 @@ const { globalPrefix, token } = require('./config.json');
 const Keyv = require('keyv');
 const client = new Client();
 const online = true;
+const chalk = require('chalk');
+const winston = require('winston');
+const logger = winston.createLogger({
+	transports: [
+		new winston.transports.Console(),
+		new winston.transports.File({ filename: 'log' }),
+	],
+	format: winston.format.printf(log => `[${log.level.toUpperCase()}] - ${log.message}`),
+});
 
 // for more member control
 new Discord.Guild();
 
 // for data control for guilds and members
 const prefixes = new Keyv('sqlite://./database.sqlite');
+// eslint-disable-next-line no-unused-vars
+const economy = new Keyv('sqlite://./economy.sqlite');
 
-prefixes.on('error', err => console.error('Keyv connection error:', err));
+prefixes.on('error', err => logger.log('Keyv connection error:', err));
 
 // makes the commands folder work with this
 client.commands = new Discord.Collection();
@@ -32,10 +43,13 @@ function sleep(ms) {
 async function status() {
 	while(online == true) {
 		client.user.setPresence({ activity: { name: 'do [help for commands!' }, status: 'online' });
-		console.log('changed status');
+		logger.log('info', chalk.greenBright('changed status'));
 		await sleep(3600000);
 		client.user.setActivity('custom statuses when', { type: 'PLAYING' });
-		console.log('changed status');
+		logger.log('info', chalk.greenBright('changed status'));
+		await sleep(3600000);
+		client.user.setActivity('new commands!', { type: 'PLAYING' });
+		logger.log('info', chalk.greenBright('changed status'));
 		await sleep(3600000);
 	}
 }
@@ -45,23 +59,27 @@ const cooldowns = new Discord.Collection();
 
 // logs websocket errors
 client.on('shardError', error => {
-	console.error('A websocket connection encountered an error:', error);
+	console.error('error', chalk.redBright('A websocket connection encountered an error:'), error);
 });
 
-// listens for unhandled rejections
+// logs unhandled rejections
 process.on('unhandledRejection', error => {
-	console.error('Unhandled promise rejection:', error);
+	logger.log('error', chalk.redBright('Unhandled promise rejection:'), error);
 });
 
-// says when the bot is ready
+// says when bot does the funny thing
 client.once('ready', () => {
-	console.log('Ready!');
+	logger.log('info', chalk.greenBright.bold('Ready!'));
 	status();
 });
 
 // for running commands
 client.on('message', async message => {
 	if(message.author.bot) return;
+
+	if(!message.author.bot) {
+		// add economy stuff here later im too lazy to do it now
+	}
 
 	let args;
 
@@ -134,6 +152,7 @@ client.on('message', async message => {
 
 	try {
 		command.execute(message, args);
+	// Why do I not just diable this? idk man I just don't
 	// eslint-disable-next-line brace-style
 	} catch(error) {
 		console.error(error);

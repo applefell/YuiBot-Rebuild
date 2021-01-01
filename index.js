@@ -5,8 +5,11 @@ const { globalPrefix, token } = require('./config.json');
 const Keyv = require('keyv');
 const client = new Client();
 const online = true;
+const { Op } = require('sequelize');
+const moners = new Discord.Collection();
 const chalk = require('chalk');
 const winston = require('winston');
+const { Users, Shop } = require('./Objects');
 const logger = winston.createLogger({
 	transports: [
 		new winston.transports.Console(),
@@ -20,8 +23,27 @@ new Discord.Guild();
 
 // for data control for guilds and members
 const prefixes = new Keyv('sqlite://./database.sqlite');
-// eslint-disable-next-line no-unused-vars
-const economy = new Keyv('sqlite://./economy.sqlite');
+
+// idk man economy things
+Reflect.defineProperty(moners, 'add', {
+	value: async function add(id, amount) {
+		const user = moners.get(id);
+		if(user) {
+			user.balance += Number(amount);
+			return user.save();
+		}
+		const newUser = await Users.create({ user_id: id, balance: amount });
+		moners.set(id, newUser);
+		return newUser;
+	},
+});
+
+Reflect.defineProperty(moners, 'getBalance', {
+	value: function getBalance(id) {
+		const user = moners.get(id);
+		return user ? user.balance : 0;
+	},
+});
 
 prefixes.on('error', err => logger.log('Keyv connection error:', err));
 
@@ -68,7 +90,9 @@ process.on('unhandledRejection', error => {
 });
 
 // says when bot does the funny thing
-client.once('ready', () => {
+client.once('ready', async () => {
+	const storedBalances = await Users.findAll();
+	storedBalances.forEach(b => moners.set(b.user_id, b));
 	logger.log('info', chalk.greenBright.bold('Ready!'));
 	status();
 });
@@ -78,7 +102,11 @@ client.on('message', async message => {
 	if(message.author.bot) return;
 
 	if(!message.author.bot) {
-		// add economy stuff here later im too lazy to do it now
+		const ran = Math.floor(Math.random() * (100 - 1) + 1);
+
+		if(ran >= 55) {
+			moners.add(message.author.id, 1);
+		}
 	}
 
 	let args;
@@ -155,10 +183,12 @@ client.on('message', async message => {
 	// Why do I not just diable this? idk man I just don't
 	// eslint-disable-next-line brace-style
 	} catch(error) {
-		console.error(error);
+		logger.log('error', error);
 		message.reply('An error occured while executing that command.');
 	}
 });
 
 // login to discord
 client.login(token);
+
+module.exports = { Users, moners, Shop, Op, client };

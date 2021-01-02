@@ -67,7 +67,7 @@ async function status() {
 		client.user.setPresence({ activity: { name: 'do [help for commands!' }, status: 'online' });
 		logger.log('info', chalk.greenBright('changed status'));
 		await sleep(3600000);
-		client.user.setActivity('custom statuses when', { type: 'PLAYING' });
+		client.user.setActivity('Please crash the economy of this bot', { type: 'PLAYING' });
 		logger.log('info', chalk.greenBright('changed status'));
 		await sleep(3600000);
 		client.user.setActivity('new commands!', { type: 'PLAYING' });

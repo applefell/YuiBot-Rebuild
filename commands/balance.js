@@ -1,14 +1,12 @@
-const { moners } = require('../index');
-
 module.exports = {
 	name: 'balance',
-	description: 'Tells you your balance or someone elses balance!',
+	description: 'Tells you your balance!',
 	cooldown: 2,
 	aliases: ['bal'],
 	// eslint-disable-next-line no-unused-vars
 	execute(message, args) {
-		const target = message.mentions.users.first() || message.author;
-		const money = moners.getBalance(target.id);
-		message.channel.send(`${target.tag} has ${money}$`);
+		const { moners } = require('../index');
+		const money = moners.getBalance(message.author.id);
+		message.channel.send(`${message.author.tag} has ${money}$`);
 	},
 };

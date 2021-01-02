@@ -11,7 +11,7 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 	host: 'localhost',
 	dialect: 'sqlite',
 	logging: false,
-	storage: 'economy.sqlite',
+	storage: 'database.sqlite',
 });
 
 const Shop = require('./models/Shop')(sequelize, Sequelize.DataTypes);

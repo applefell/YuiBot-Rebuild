@@ -1,5 +1,3 @@
-const { client, moners } = require('../index');
-
 module.exports = {
 	name: 'leaderboard',
 	description: 'Shows who has the most money!',
@@ -7,6 +5,7 @@ module.exports = {
 	guildOnly: true,
 	// eslint-disable-next-line no-unused-vars
 	execute(message, args) {
+		const { client, moners } = require('../index');
 		message.channel.send(
 			moners.sort((a, b) => b.balance - a.balance)
 				.filter(user => client.users.cache.has(user.user_id))

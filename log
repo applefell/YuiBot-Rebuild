@@ -1,1 +1,23 @@
 [ERROR] - [91mUnhandled promise rejection:[39m An invalid token was provided.
+[ERROR] - [91mUnhandled promise rejection:[39m SQLITE_ERROR: no such table: users
+[INFO] - Database synced
+[INFO] - [92m[1mReady![22m[39m
+[INFO] - [92mchanged status[39m
+[ERROR] - Cannot read property 'getBalance' of undefined
+[INFO] - [92m[1mReady![22m[39m
+[INFO] - [92mchanged status[39m
+[ERROR] - Cannot read property 'getBalance' of undefined
+[ERROR] - Cannot read property 'getBalance' of undefined
+[ERROR] - Cannot read property 'getBalance' of undefined
+[ERROR] - Cannot read property 'getBalance' of undefined
+[ERROR] - [91mUnhandled promise rejection:[39m SQLITE_IOERR: disk I/O error
+[INFO] - Database synced
+[INFO] - [92m[1mReady![22m[39m
+[INFO] - [92mchanged status[39m
+[ERROR] - Cannot read property 'getBalance' of undefined
+[INFO] - [92m[1mReady![22m[39m
+[INFO] - [92mchanged status[39m
+[INFO] - [92m[1mReady![22m[39m
+[INFO] - [92mchanged status[39m
+[INFO] - [92m[1mReady![22m[39m
+[INFO] - [92mchanged status[39m

@@ -3,7 +3,7 @@ const sequelize = new Sequelize('database', 'username', 'password', {
 	host: 'localhost',
 	dialect: 'sqlite',
 	logging: false,
-	storage: 'economy.sqlite',
+	storage: 'database.sqlite',
 });
 
 const Users = require('./models/Users')(sequelize, Sequelize.DataTypes);

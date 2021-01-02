@@ -8,6 +8,7 @@ module.exports = {
 	// eslint-disable-next-line no-unused-vars
 	execute(message, args) {
 		const target = message.mentions.users.first() || message.author;
-		message.channel.send(`${target.tag} has ${moners.getBalance(target.id)}$`);
+		const money = moners.getBalance(target.id);
+		message.channel.send(`${target.tag} has ${money}$`);
 	},
 };

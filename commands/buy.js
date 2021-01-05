@@ -5,16 +5,18 @@ module.exports = {
 	// eslint-disable-next-line no-unused-vars
 	async execute(message, args) {
 		const { Op, Shop, Users, moners } = require('../index');
-		const item = await Shop.findOne({ where: { name: { [Op.like]: args } } });
-		if(!item) message.channel.send('that item does not exist.');
+
+		const item = await Shop.findOne({ where: { shop_id: { [Op.like]: args } } });
+		if(!item) message.channel.send('that item does not exist, make sure you are using the items id!');
 		if(item.cost > moners.getBalance(message.author.id)) {
-			message.channel.send('You do not have enough money');
+			message.channel.send('You do not have enough money for that item.');
 		}
 
 		const user = await Users.findOne({ where: { user_id: message.author.id } });
+
 		moners.add(message.author.id, -item.cost);
 		await user.addItem(item);
 
-		message.channel.send(`You have bought ${item.name}`);
+		message.channel.send(`You have bought ${item.name}!`);
 	},
 };

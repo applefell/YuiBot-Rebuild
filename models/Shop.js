@@ -4,10 +4,15 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.STRING,
 			unique: true,
 		},
+		shop_id: {
+			type: DataTypes.STRING,
+			unique: true,
+		},
 		cost: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
+		usable: DataTypes.BOOLEAN,
 	}, {
 		timestamps: false,
 	});

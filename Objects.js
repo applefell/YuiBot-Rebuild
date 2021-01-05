@@ -32,4 +32,15 @@ Users.prototype.getItems = function() {
 	});
 };
 
+Users.prototype.removeItem = async function(item) {
+	const useritem = await UserItems.findOne({
+		where: { huser_id: this.user_id, item_id: item.id },
+	});
+
+	if(useritem) {
+		useritem.amount -= 1;
+		return useritem.save();
+	}
+};
+
 module.exports = { Users, Shop, UserItems };

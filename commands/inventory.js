@@ -14,7 +14,7 @@ module.exports = {
 			message.channel.send(`${target.tag} has nothing!`);
 		// eslint-disable-next-line brace-style
 		} else {
-			message.channel.send(`${target.tag} currently has ${items.map(t => `${t.amount} ${t.item.name}`).join(', ')}`);
+			message.channel.send(`${target.tag} currently has ${items.map(t => `${t.amount} ${t.item.name} ${t.item.item_id}`).join(', ')}`);
 		}
 	},
 };

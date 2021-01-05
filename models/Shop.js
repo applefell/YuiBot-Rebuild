@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.STRING,
 			unique: true,
 		},
-		shop_id: {
+		item_id: {
 			type: DataTypes.STRING,
 			unique: true,
 		},

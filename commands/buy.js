@@ -6,7 +6,7 @@ module.exports = {
 	async execute(message, args) {
 		const { Op, Shop, Users, moners } = require('../index');
 
-		const item = await Shop.findOne({ where: { shop_id: { [Op.like]: args } } });
+		const item = await Shop.findOne({ where: { item_id: { [Op.like]: args } } });
 		if(!item) message.channel.send('that item does not exist, make sure you are using the items id!');
 		if(item.cost > moners.getBalance(message.author.id)) {
 			message.channel.send('You do not have enough money for that item.');

@@ -34,7 +34,7 @@ Users.prototype.getItems = function() {
 
 Users.prototype.removeItem = async function(item) {
 	const useritem = await UserItems.findOne({
-		where: { huser_id: this.user_id, item_id: item.id },
+		where: { user_id: this.user_id, item_id: item.id },
 	});
 
 	if(useritem) {

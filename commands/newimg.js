@@ -5,9 +5,10 @@ const img_imas = require('./special_functions/imas_switch');
 const img_ran = require('./special_functions/randomswitch');
 
 module.exports = {
-	name: 'newimg',
+	name: 'image',
 	description: 'The new and improved image command!',
 	cooldown: 5,
+	aliases: ['pics', 'picture'],
 	// eslint-disable-next-line no-unused-vars
 	execute(message, args) {
 		const reaction_numbers = ['\u0030\u20E3', '\u0031\u20E3', '\u0032\u20E3', '\u0033\u20E3', '\u0034\u20E3', '\u0035\u20E3', '\u0036\u20E3', '\u0037\u20E3', '\u0038\u20E3', '\u0039\u20E3'];

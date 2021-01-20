@@ -12,7 +12,10 @@ module.exports = (sequelize, DataTypes) => {
 			type: DataTypes.INTEGER,
 			allowNull: false,
 		},
-		usable: DataTypes.BOOLEAN,
+		usable: {
+			type: DataTypes.BOOLEAN,
+			primaryKey: true,
+		},
 	}, {
 		timestamps: false,
 	});

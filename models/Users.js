@@ -9,9 +9,6 @@ module.exports = (sequelize, DataTypes) => {
 			defaultValue: 0,
 			allowNull: false,
 		},
-		clover_active: {
-			type: DataTypes.BOOLEAN,
-		},
 	}, {
 		timestamps: false,
 	});

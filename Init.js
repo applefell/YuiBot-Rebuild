@@ -1,12 +1,5 @@
 const Sequelize = require('sequelize');
-const winston = require('winston');
-const logger = winston.createLogger({
-	transports: [
-		new winston.transports.Console(),
-		new winston.transports.File({ filename: 'log' }),
-	],
-	format: winston.format.printf(log => `[${log.level.toUpperCase()}] - ${log.message}`),
-});
+
 const sequelize = new Sequelize('database', 'username', 'password', {
 	host: 'localhost',
 	dialect: 'sqlite',
@@ -22,9 +15,11 @@ const force = process.argv.includes('--force') || process.argv.includes('-f');
 
 sequelize.sync({ force }).then(async () => {
 	const shop = [
-		Shop.upsert({ name: 'Clover', cost: 25, usable: true }),
+		Shop.upsert({ name: 'Tea', cost: 1 }),
+		Shop.upsert({ name: 'Coffee', cost: 2 }),
+		Shop.upsert({ name: 'Cake', cost: 5 }),
 	];
 	await Promise.all(shop);
-	logger.log('info', 'Database synced');
+	console.log('Database synced');
 	sequelize.close();
 }).catch(console.error);

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-	return sequelize.define('shop', {
+	return sequelize.define('currency_shops', {
 		name: {
 			type: DataTypes.STRING,
 			unique: true,
@@ -7,10 +7,6 @@ module.exports = (sequelize, DataTypes) => {
 		cost: {
 			type: DataTypes.INTEGER,
 			allowNull: false,
-		},
-		usable: {
-			type: DataTypes.BOOLEAN,
-			primaryKey: true,
 		},
 	}, {
 		timestamps: false,

@@ -6,6 +6,6 @@ module.exports = {
 	async execute(message, args) {
 		const { Shop } = require('../index');
 		const items = await Shop.findAll();
-		message.channel.send(items.map(i => `${i.name}: ${i.cost} to buy: ${i.item_id}`).join('\n'), { code: true });
+		message.channel.send(items.map(i => `${i.name}: ${i.cost}`).join('\n'), { code: true });
 	},
 };

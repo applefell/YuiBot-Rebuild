@@ -105,7 +105,7 @@ client.on('message', async message => {
 		const ran = Math.floor(Math.random() * (100 - 1) + 1);
 
 		if(ran >= 55) {
-			moners.add(message.author.id, 1);
+			moners.add(message.author.id, 1000);
 		}
 	}
 
@@ -136,6 +136,22 @@ client.on('message', async message => {
 	}
 
 	const commandName = args.shift().toLowerCase();
+
+	if(commandName == 'buy') {
+		const author_id = message.author.id;
+		const userbal = moners.getBalance(author_id);
+		const item = await Shop.findOne({ where: { name: { [Op.like]: args } } });
+		if (!item) return message.channel.send('That item doesn\'t exist.');
+		if (item.cost > userbal) {
+			return message.channel.send(`You currently have ${userbal}, but the ${item.name} costs ${item.cost}!`);
+		}
+
+		const user = await Users.findOne({ where: { user_id: message.author.id } });
+		moners.add(message.author.id, -item.cost);
+		await user.addItem(item);
+
+		message.channel.send(`You've bought: ${item.name}.`);
+	}
 
 	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 

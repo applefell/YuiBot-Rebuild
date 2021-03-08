@@ -1,0 +1,38 @@
+{
+  "name": "yuibot-rebuild",
+  "version": "1.0.0",
+  "description": "A rebuild of my original YuiBot discord bot but cool now :sunglasses:",
+  "main": "index.js",
+  "dependencies": {
+    "babel-eslint": "^10.1.0",
+    "canvas": "^2.6.1",
+    "chalk": "^4.1.0",
+    "dblapi.js": "^2.4.1",
+    "discord.js": "^12.5.1",
+    "discord-youtube-api": "^0.1.0",
+    "eslint": "^7.13.0",
+    "ffmpeg": "^0.0.4",
+    "ffmpeg-static": "^4.2.7",
+    "fluent-ffmpeg": "^2.1.2",
+    "keyv": "^4.0.3",
+    "opusscript": "^0.0.7",
+    "sequelize": "^6.3.5",
+    "sqlite3": "^5.0.0",
+    "winston": "^3.3.3",
+    "ytdl-core": "^4.3.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/applefell/YuiBot-Rebuild.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/applefell/YuiBot-Rebuild/issues"
+  },
+  "homepage": "https://github.com/applefell/YuiBot-Rebuild#readme"
+}

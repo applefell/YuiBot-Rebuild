@@ -62,12 +62,16 @@ for (const file of commandFiles) {
 function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
+
 async function status() {
 	while(online == true) {
 		client.user.setPresence({ activity: { name: 'do [help for commands!' }, status: 'online' });
 		logger.log('info', chalk.greenBright('changed status'));
 		await sleep(3600000);
 		client.user.setActivity('Please crash the economy of this bot', { type: 'PLAYING' });
+		logger.log('info', chalk.greenBright('changed status'));
+		await sleep(3600000);
+		client.user.setActivity('do [help for commands!');
 		logger.log('info', chalk.greenBright('changed status'));
 		await sleep(3600000);
 		client.user.setActivity('new commands!', { type: 'PLAYING' });

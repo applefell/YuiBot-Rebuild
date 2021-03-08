@@ -145,8 +145,8 @@ client.on('message', async message => {
 		const author_id = message.author.id;
 		const userbal = moners.getBalance(author_id);
 		const item = await Shop.findOne({ where: { name: { [Op.like]: args } } });
-		if (!item) return message.channel.send('That item doesn\'t exist.');
-		if (item.cost > userbal) {
+		if(!item) return message.channel.send('That item doesn\'t exist.');
+		if(item.cost > userbal) {
 			return message.channel.send(`You currently have ${userbal}, but the ${item.name} costs ${item.cost}!`);
 		}
 

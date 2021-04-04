@@ -10,7 +10,7 @@ module.exports = {
 
 		if(!args.length) {
 			data.push('Here\'s a list of all my commands:');
-			data.push(commands.map(command => command.name).join(', ') + ', buy');
+			data.push(commands.map(command => command.name).join(', ') + ', buy, sell');
 			data.push(`\nYou can send \`${globalPrefix}help [command name]\` to get help with a specific command! \nYou can also join my discord server at: discord.gg/W3tvcam`);
 
 			return message.author.send(data, { split: true }).then(() => {
@@ -26,6 +26,10 @@ module.exports = {
 
 		if(name == 'buy') {
 			message.channel.send('**Name:** buy\n**Description:** Lets you buy stuff with your moners!\n**Usage:** `[buy (item name)`');
+		}
+
+		if(name == 'sell') {
+			message.channel.send('**Name:** buy\n**Description:** Lets you sell the items you have purchased!\n**Usage:** `[sell (item name)`');
 		}
 
 		const command = commands.get(name) || commands.find(c => c.aliases && c.aliases.includes(name));

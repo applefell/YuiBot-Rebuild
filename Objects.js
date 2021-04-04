@@ -27,12 +27,57 @@ Users.prototype.addItem = async function(item) {
 	return UserItems.create({ user_id: this.user_id, item_id: item.id, amount: 1 });
 };
 
+Users.prototype.addItems = async function(item, itemAmount) {
+	const userItem = await UserItems.findOne({
+		where: { user_id: this.user_id, item_id: item.id },
+	});
+
+	if (userItem) {
+		userItem.amount += itemAmount;
+		return userItem.save();
+	}
+
+	return UserItems.create({ user_id: this.user_id, item_id: item.id, amount: itemAmount });
+};
+
+Users.prototype.removeItems = async function(item, itemAmount) {
+	const userItem = await UserItems.findOne({
+		where: { user_id: this.user_id, item_id: item.id },
+	});
+
+	userItem.amount -= itemAmount;
+	return userItem.save();
+};
+
 /* eslint-disable-next-line func-names */
 Users.prototype.getItems = function() {
 	return UserItems.findAll({
 		where: { user_id: this.user_id },
 		include: ['item'],
 	});
+};
+
+/* eslint-disable-next-line func-names */
+Users.prototype.checkItem = async function(item) {
+	const userItem = await UserItems.findOne({
+		where: { user_id: this.user_id, item_id: item.id },
+	});
+
+	if (userItem) {
+		return true;
+	// eslint-disable-next-line brace-style
+	} else {
+		return false;
+	}
+};
+
+Users.prototype.removeItem = async function(item) {
+	const userItem = await UserItems.findOne({
+		where: { user_id: this.user_id, item_id: item.id },
+	});
+
+	userItem.amount -= 1;
+	return userItem.save();
 };
 
 module.exports = { Users, Shop, UserItems };

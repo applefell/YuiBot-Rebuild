@@ -68,7 +68,7 @@ async function status() {
 		client.user.setPresence({ activity: { name: 'do [help for commands!' }, status: 'online' });
 		logger.log('info', chalk.greenBright('changed status'));
 		await sleep(3600000);
-		client.user.setActivity('Please crash the economy of this bot', { type: 'PLAYING' });
+		client.user.setActivity('haha gambling', { type: 'PLAYING' });
 		logger.log('info', chalk.greenBright('changed status'));
 		await sleep(3600000);
 		client.user.setActivity('do [help for commands!');
@@ -108,8 +108,8 @@ client.on('message', async message => {
 	if(!message.author.bot) {
 		const ran = Math.floor(Math.random() * (100 - 1) + 1);
 
-		if(ran >= 55) {
-			moners.add(message.author.id, 1000);
+		if(ran >= 65) {
+			moners.add(message.author.id, 1);
 		}
 	}
 
@@ -144,17 +144,67 @@ client.on('message', async message => {
 	if(commandName == 'buy') {
 		const author_id = message.author.id;
 		const userbal = moners.getBalance(author_id);
-		const item = await Shop.findOne({ where: { name: { [Op.like]: args } } });
+		const item = await Shop.findOne({ where: { name: { [Op.like]: args[0] } } });
 		if(!item) return message.channel.send('That item doesn\'t exist.');
 		if(item.cost > userbal) {
 			return message.channel.send(`You currently have ${userbal}, but the ${item.name} costs ${item.cost}!`);
 		}
 
 		const user = await Users.findOne({ where: { user_id: message.author.id } });
-		moners.add(message.author.id, -item.cost);
-		await user.addItem(item);
+
+		if(args[1]) {
+			const amount = parseInt(args[1]);
+			if(amount % 1 === 0) {
+				const newCost = amount * item.cost;
+
+				moners.add(message.author.id, -newCost);
+				await user.addItems(item, amount);
+			// eslint-disable-next-line brace-style
+			} else {
+				message.channel.send('When buying multiple items you have to use a whole number!');
+			}
+		// eslint-disable-next-line brace-style
+		} else {
+			moners.add(message.author.id, -item.cost);
+			await user.addItem(item);
+		}
 
 		message.channel.send(`You've bought: ${item.name}.`);
+	}
+
+	if(commandName == 'sell') {
+		const item = await Shop.findOne({ where: { name: { [Op.like]: args[0] } } });
+		if(!item) return message.channel.send('That item doesn\'t exist.');
+
+		const user = await Users.findOne({ where: { user_id: message.author.id } });
+		const haveItem = await user.checkItem(item);
+
+		if(haveItem == true) {
+			if(args[1]) {
+				const amount = parseInt(args[1]);
+				if(amount % 1 === 0) {
+					await user.removeItems(item, amount);
+					moners.add(message.author.id, item.cost);
+
+					message.channel.send(`You've sold: ${amount} ${item.name}s.`);
+				// eslint-disable-next-line brace-style
+				} else {
+					message.channel.send('When selling multiple items you have to use a whole number!');
+				}
+			// eslint-disable-next-line brace-style
+			} else {
+				await user.removeItem(item);
+				moners.add(message.author.id, item.cost);
+
+				message.channel.send(`You've sold: ${item.name}.`);
+			}
+		// eslint-disable-next-line brace-style
+		} else if(haveItem == false) {
+			message.channel.send('You don\'t have that item.');
+		// eslint-disable-next-line brace-style
+		} else {
+			message.channel.send('there was an error, please try again later.');
+		}
 	}
 
 	const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));

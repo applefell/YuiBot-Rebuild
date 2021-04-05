@@ -3,7 +3,7 @@ module.exports = {
 	description: 'deletes up to 99 messages from up to two weeks ago.',
 	guildOnly: true,
 	args: true,
-	usage: 'number 1-99',
+	usage: '(number 1-99)',
 	execute(message, args) {
 		if(message.member.hasPermission('MANAGE_MESSAGES')) {
 			const amount = parseInt(args[0]) + 1;

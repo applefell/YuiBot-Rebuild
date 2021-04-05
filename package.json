@@ -19,7 +19,8 @@
     "sequelize": "^6.3.5",
     "sqlite3": "^5.0.0",
     "winston": "^3.3.3",
-    "ytdl-core": "^4.3.0"
+    "ytdl-core": "^4.3.0",
+    "booru": "^2.0.4"
   },
   "devDependencies": {},
   "scripts": {

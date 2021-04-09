@@ -29,5 +29,5 @@ module.exports = {
 			
 			message.channel.send(imageEmbed);
 		}
-	}
-}
+	},
+};

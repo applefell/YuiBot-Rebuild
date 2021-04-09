@@ -5,6 +5,8 @@ module.exports = {
 	name: 'gamble',
 	description: 'Try your luck and maybe earn some money!',
 	cooldown: 5,
+	args: true,
+	usage: '(amount to gamble)',
 	// eslint-disable-next-line no-unused-vars
 	execute(message, args) {
 		const gambleAmount = args;

@@ -6,7 +6,7 @@ module.exports = {
 	args: true,
 	guildOnly: true,
 	cooldown: 5,
-	usage: 'link',
+	usage: '(link)',
 	async execute(message) {
 		try {
 			const args = message.content.split(' ');

@@ -25,6 +25,12 @@ module.exports = {
 				url: songInfo.videoDetails.video_url,
 			};
 
+			// should hopefully catch songs that return as null before adding it to the queue
+			if(song.url === null) {
+				message.channel.send('There was a problem while trying to play that song, make sure the url is correct.');
+				return;
+			}
+
 			if(!serverQueue) {
 				const queueConstruct = {
 					textChannel: message.channel,

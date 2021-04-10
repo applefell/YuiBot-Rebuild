@@ -12,7 +12,7 @@ module.exports = {
 		// get users balance and make sure that they aint spending more than they got, that means you IronicallyUncreative
 		const { moners } = require('../index');
 		const userAmount = moners.getBalance(message.author.id);
-		const gambleAmount = args;
+		const gambleAmount = Number(args);
 		// make sure people gamble money instead of strings
 		if(typeof gambleAmount === 'number') {
 			// actually check how much they got to what they gamblin

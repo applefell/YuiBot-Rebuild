@@ -20,7 +20,7 @@ module.exports = {
 			const imageEmbed = new Discord.MessageEmbed()
 							.setColor('#1dde47')
 							.setTimestamp()
-							.setImage(`${post.fileUrl}`);
+							.setImage(String(post.fileUrl));
 
 			message.channel.send(imageEmbed);
 		}

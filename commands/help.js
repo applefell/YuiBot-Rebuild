@@ -10,7 +10,7 @@ module.exports = {
 
 		if(!args.length) {
 			data.push('Here\'s a list of all my commands:');
-			data.push(commands.map(command => command.name).join(', ') + ', buy, sell');
+			data.push(commands.map(command => command.name).join(', ') + ', buy, sell, queue, nowplaying');
 			data.push(`\nYou can send \`${globalPrefix}help [command name]\` to get help with a specific command! \nYou can also join my discord server at: discord.gg/W3tvcam`);
 
 			return message.author.send(data, { split: true }).then(() => {

@@ -28,6 +28,14 @@ module.exports = {
 			message.channel.send('**Name:** buy\n**Description:** Lets you buy stuff with your moners!\n**Usage:** `[buy (item name)`');
 		}
 
+		if(name == 'nowplaying') {
+			message.channel.send('**Name:** nowplaying\n**Description:** See what song is currently playing!');
+		}
+
+		if(name == 'queue'){
+			message.channel.send('**Name:** queue\n**Description:** Shows up to the next 10 songs in the queue!');
+		}
+
 		if(name == 'sell') {
 			message.channel.send('**Name:** buy\n**Description:** Lets you sell the items you have purchased!\n**Usage:** `[sell (item name)`');
 		}

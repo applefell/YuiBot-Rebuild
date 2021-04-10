@@ -8,7 +8,7 @@ module.exports = {
 	usage: '(tag)',
 	aliases: ['booru'],
 	// eslint-disable-next-line no-unused-vars
-	execute(message, args) {
+	async execute(message, args) {
 		// try to make sure that the tag is in the right format, no guarantees
 		const tag = String(args[0]).toLowerCase();
 
@@ -16,16 +16,13 @@ module.exports = {
 		if(args[1]) {
 			message.channel.send('For now you can only use one tag at a time.\nFor help on how tags work go here: https://safebooru.donmai.us/wiki_pages/help:posts');
 		} else {
-			Booru.search('safebooru', [`${tag}`], { limit: 1, random: true })
-				.then(posts => {
-					for (let post of posts)
-						const imageEmbed = new Discord.MessageEmbed()
+			const post = await Booru.search('safebooru', [`${tag}`], { limit: 1, random: true })
+			const imageEmbed = new Discord.MessageEmbed()
 							.setColor('#1dde47')
 							.setTimestamp()
 							.setImage(`${post.fileUrl}`);
 
-						message.channel.send(imageEmbed);
-				});
+			message.channel.send(imageEmbed);
 		}
 	},
 };

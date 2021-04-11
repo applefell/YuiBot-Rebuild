@@ -6,6 +6,7 @@ module.exports = {
 	description: 'Fetches an image from safebooru based on the tag you choose!',
 	cooldown: 10,
 	usage: '(tag)',
+	args: true,
 	aliases: ['booru'],
 	// eslint-disable-next-line no-unused-vars
 	async execute(message, args) {

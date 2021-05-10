@@ -6,7 +6,8 @@ module.exports = {
 	guildOnly: true,
 	// eslint-disable-next-line no-unused-vars
 	execute(client, message, args) {
-		if(!message.member.voice.channel) return message.channel.send('You have to be in a voice channel to use this command!');
+		const voiceChannel = message.member.voice.channel;
+		if(!voiceChannel) return message.channel.send('You have to be in a voice channel to use this command!');
 
 		client.distube.play(message, args.join(' '));
 	},

@@ -4,7 +4,8 @@ module.exports = {
 	cooldown: 5,
 	guildOnly: true,
 	execute(client, message, args) {
-		if(!message.member.voice.channel) return message.channel.send('You have to be in a voice channel to use this command!');
+		const voiceChannel = message.member.voice.channel;
+		if(!voiceChannel) return message.channel.send('You have to be in a voice channel to use this command!');
 
 		if(args) {
 			const num = parseInt(args[0]);

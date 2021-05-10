@@ -6,7 +6,7 @@ module.exports = {
 	description: 'changes the bots prefix on your server!',
 	args: true,
 	guildOnly: true,
-	async execute(message, args) {
+	async execute(client, message, args) {
 		const ownerID = message.guild.ownerID;
 		if(message.author.id == ownerID) {
 			await prefixes.set(message.guild.id, args[0]);

@@ -100,21 +100,8 @@ client.once('ready', async () => {
 	const storedBalances = await Users.findAll();
 	storedBalances.forEach(b => moners.set(b.user_id, b));
 	logger.log('info', chalk.greenBright.bold('Ready!'));
-	client.distube.on('error', (message, error) => {
-		message.channel.send(`An error has occured: ${error}.`);
-	});
 	status();
 });
-
-client.distube
-	.on('playSong', (message, queue, song) => message.channel.send(
-		// eslint-disable-next-line comma-dangle
-		`Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}`
-	))
-	.on('addSong', (message, queue, song) => message.channel.send(
-		// eslint-disable-next-line comma-dangle
-		`Added \`${song.name}\` - \`${song.formattedDuration}\` to the queue!`
-	));
 
 // for running commands
 client.on('message', async message => {
@@ -233,7 +220,7 @@ client.on('message', async message => {
 
 	// checks if a command requires arguments
 	if(command.args && !args.length) {
-		let reply = `${message.author}, You didnt provide any arguments!`;
+		let reply = `${message.author}, You didn't provide any arguments!`;
 
 		if(command.usage) {
 			reply += `\nTo use this command do: \`${globalPrefix}${command.name} ${command.usage}\``;
@@ -264,7 +251,7 @@ client.on('message', async message => {
 	setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 	try {
-		command.execute(message, args);
+		command.execute(client, message, args);
 	// Why do I not just diable this? idk man I just don't
 	// eslint-disable-next-line brace-style
 	} catch(error) {
@@ -272,6 +259,20 @@ client.on('message', async message => {
 		message.reply('An error occured while executing that command.');
 	}
 });
+
+client.distube
+	.on('playSong', (message, song) => message.channel.send(
+		// eslint-disable-next-line comma-dangle
+		`Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}`
+	))
+	.on('addSong', (message, song) => message.channel.send(
+		// eslint-disable-next-line comma-dangle
+		`Added \`${song.name}\` - \`${song.formattedDuration}\` to the queue!`
+	))
+	.on('error', (message, error) => {
+		message.channel.send(`An error has occured: ${error}.`);
+	});
+
 
 // login to discord
 client.login(token);

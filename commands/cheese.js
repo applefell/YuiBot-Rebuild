@@ -5,7 +5,7 @@ module.exports = {
 	description: 'Sends a random picture of cheese!',
 	cooldown: 2,
 	// eslint-disable-next-line no-unused-vars
-	execute(message, args) {
+	execute(client, message, args) {
 		const ran = Math.floor(Math.random() * (14 - 1) + 1);
 
 		const pic = img.findCheese(ran);

@@ -5,7 +5,7 @@ module.exports = {
 	description: 'Sends a random gif from the popular anime K-On!',
 	cooldown: 2,
 	// eslint-disable-next-line no-unused-vars
-	execute(message, args) {
+	execute(client, message, args) {
 		const ran = Math.floor(Math.random() * (32 - 1) + 1);
 
 		const gif = img.findImage(ran);

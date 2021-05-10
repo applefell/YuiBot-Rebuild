@@ -5,7 +5,7 @@ module.exports = {
 	description: 'Lets you vote for the bot!',
 	cooldown: 2,
 	// eslint-disable-next-line no-unused-vars
-	execute(message, args) {
+	execute(client, message, args) {
 		const voteEmbed = new Discord.MessageEmbed()
 			.setColor('#1dde47')
 			.setTitle('Vote for the bot!')

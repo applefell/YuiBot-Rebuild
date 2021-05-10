@@ -4,7 +4,7 @@ module.exports = {
 	description: 'Lists all commands and info on each command!',
 	aliases: ['commands'],
 	cooldown: 5,
-	execute(message, args) {
+	execute(client, message, args) {
 		const data = [];
 		const { commands } = message.client;
 
@@ -32,7 +32,7 @@ module.exports = {
 			message.channel.send('**Name:** nowplaying\n**Description:** See what song is currently playing!');
 		}
 
-		if(name == 'queue'){
+		if(name == 'queue') {
 			message.channel.send('**Name:** queue\n**Description:** Shows up to the next 10 songs in the queue!');
 		}
 

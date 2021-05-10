@@ -3,7 +3,7 @@ module.exports = {
 	description: 'Gives you some cash every 24 hours!',
 	cooldown: 86400,
 	// eslint-disable-next-line no-unused-vars
-	execute(message, args) {
+	execute(client, message, args) {
 		const add = Math.floor(Math.random() * (100 - 1) + 1);
 		const { moners } = require('../index');
 

@@ -4,10 +4,11 @@ module.exports = {
 	cooldown: 3,
 	guildOnly: true,
 	// eslint-disable-next-line no-unused-vars
-	async execute(client, message, args) {
-		if(!message.member.voice.channel) return message.channel.send('You have to be in a voice channel to use this command!');
+	execute(client, message, args) {
+		const voiceChannel = message.member.voice.channel;
+		if(!voiceChannel) return message.channel.send('You have to be in a voice channel to use this command!');
 
-		const queue = await client.distube.getQueue(message);
+		const queue = client.distube.getQueue(message);
 
 		if(queue) {
 			client.distube.stop(message);

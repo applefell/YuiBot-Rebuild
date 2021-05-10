@@ -4,7 +4,7 @@ module.exports = {
 	guildOnly: true,
 	args: true,
 	usage: '(number 1-99)',
-	execute(message, args) {
+	execute(client, message, args) {
 		if(message.member.hasPermission('MANAGE_MESSAGES')) {
 			const amount = parseInt(args[0]) + 1;
 

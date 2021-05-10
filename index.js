@@ -1,10 +1,12 @@
 const Discord = require('discord.js');
 const fs = require('fs');
+const DisTube = require('distube');
 const Client = require('./client/Client');
 const { globalPrefix, token } = require('./config.json');
 const Keyv = require('keyv');
 const client = new Client();
 const online = true;
+client.distube = new DisTube(client, { searchSongs: false, emitNewSongOnly: true });
 const { Op } = require('sequelize');
 const moners = new Discord.Collection();
 const chalk = require('chalk');
@@ -98,8 +100,21 @@ client.once('ready', async () => {
 	const storedBalances = await Users.findAll();
 	storedBalances.forEach(b => moners.set(b.user_id, b));
 	logger.log('info', chalk.greenBright.bold('Ready!'));
+	client.distube.on('error', (message, error) => {
+		message.channel.send(`An error has occured: ${error}.`);
+	});
 	status();
 });
+
+client.distube
+	.on('playSong', (message, queue, song) => message.channel.send(
+		// eslint-disable-next-line comma-dangle
+		`Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}`
+	))
+	.on('addSong', (message, queue, song) => message.channel.send(
+		// eslint-disable-next-line comma-dangle
+		`Added \`${song.name}\` - \`${song.formattedDuration}\` to the queue!`
+	));
 
 // for running commands
 client.on('message', async message => {

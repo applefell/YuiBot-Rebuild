@@ -261,11 +261,11 @@ client.on('message', async message => {
 });
 
 client.distube
-	.on('playSong', (message, song) => message.channel.send(
+	.on('playSong', (message, queue, song) => message.channel.send(
 		// eslint-disable-next-line comma-dangle
 		`Playing \`${song.name}\` - \`${song.formattedDuration}\`\nRequested by: ${song.user}`
 	))
-	.on('addSong', (message, song) => message.channel.send(
+	.on('addSong', (message, queue, song) => message.channel.send(
 		// eslint-disable-next-line comma-dangle
 		`Added \`${song.name}\` - \`${song.formattedDuration}\` to the queue!`
 	))

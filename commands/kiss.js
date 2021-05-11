@@ -5,6 +5,7 @@ module.exports = {
 	name: 'kiss',
 	description: 'Lets you kiss a user, or the bot!',
 	cooldown: 2,
+	guildOnly: true,
 	// eslint-disable-next-line no-unused-vars
 	execute(client, message, args) {
 		const ran = Math.floor(Math.random() * (7 - 1) + 1);

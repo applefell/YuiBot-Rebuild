@@ -73,7 +73,7 @@ async function status() {
 		client.user.setActivity('haha gambling', { type: 'PLAYING' });
 		logger.log('info', chalk.greenBright('changed status'));
 		await sleep(3600000);
-		client.user.setActivity('do [help for commands!');
+		client.user.setActivity('');
 		logger.log('info', chalk.greenBright('changed status'));
 		await sleep(3600000);
 		client.user.setActivity('new commands!', { type: 'PLAYING' });
@@ -100,7 +100,8 @@ client.once('ready', async () => {
 	const storedBalances = await Users.findAll();
 	storedBalances.forEach(b => moners.set(b.user_id, b));
 	logger.log('info', chalk.greenBright.bold('Ready!'));
-	status();
+	// status();
+	client.user.setPresence({ activity: { name: 'How do I write a funny status'}, status: 'online'});
 });
 
 // for running commands

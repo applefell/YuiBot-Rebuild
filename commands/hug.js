@@ -5,6 +5,7 @@ module.exports = {
 	name: 'hug',
 	description: 'Lets you hug a user, or the bot!',
 	cooldown: 2,
+	guildOnly: true,
 	// eslint-disable-next-line no-unused-vars
 	execute(client, message, args) {
 		const ran = Math.floor(Math.random() * (9 - 1) + 1);

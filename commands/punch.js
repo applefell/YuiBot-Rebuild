@@ -15,7 +15,7 @@ module.exports = {
 			const img = punch.findPunch(ran);
 			const target2 = message.mentions.members.first().user;
 			const embed = new Discord.MessageEmbed()
-				.setColor('#ffc0cb')
+				.setColor('#dc143c')
 				.setTitle(`${author.username} punched ${target2.username}!`)
 				.setTimestamp()
 				.setImage(`${img}`);

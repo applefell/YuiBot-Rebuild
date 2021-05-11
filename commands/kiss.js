@@ -2,8 +2,8 @@ const Discord = require('discord.js');
 const kiss = require('./special_functions/switches');
 
 module.exports = {
-	name: 'hug',
-	description: 'Lets you hug a user, or the bot!',
+	name: 'kiss',
+	description: 'Lets you kiss a user, or the bot!',
 	cooldown: 2,
 	// eslint-disable-next-line no-unused-vars
 	execute(client, message, args) {
@@ -17,7 +17,7 @@ module.exports = {
 			const target2 = message.mentions.members.first().user;
 			const embed = new Discord.MessageEmbed()
 				.setColor('#ffc0cb')
-				.setTitle(`${author.username} Kissed ${target2.username}!`)
+				.setTitle(`${author.username} kissed ${target2.username}!`)
 				.setTimestamp()
 				.setImage(`${img}`);
 			message.channel.send(embed);
@@ -26,7 +26,7 @@ module.exports = {
 			const img = kiss.findKiss(ran);
 			const embed = new Discord.MessageEmbed()
 				.setColor('#ffc0cb')
-				.setTitle(`${author.username} Kissed ${bot.username}!`)
+				.setTitle(`${author.username} kissed ${bot.username}!`)
 				.setTimestamp()
 				.setImage(`${img}`);
 			message.channel.send(embed);

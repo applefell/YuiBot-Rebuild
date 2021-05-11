@@ -17,7 +17,7 @@ module.exports = {
 		// make sure people gamble money instead of strings
 		if(typeof gambleAmount === 'number') {
 			if(gambleAmount === 0) {
-				return message.channel.send('You have to gamble at least $1.')
+				return message.channel.send('You have to gamble at least $1.');
 			} else if(gambleAmount <= 1) {
 				// actually check how much they got to what they gamblin
 				if(gambleAmount > userAmount) {
@@ -46,13 +46,13 @@ module.exports = {
 					const mult = gamble.payout(ran1Value, ran2Value, ran3Value);
 
 					// calculate winnings
-					let winnings = gambleAmount * mult;
+					const winnings = gambleAmount * mult;
 
 					// round winnings up to two decimal places
-					let winnings = winnings.toFixed(2);
+					const winnings2 = winnings.toFixed(2);
 
 					// give user winnings
-					moners.add(message.author.id, winnings);
+					moners.add(message.author.id, winnings2);
 
 					// choose color for embed
 					const color = gamble.color(mult);
@@ -75,7 +75,7 @@ module.exports = {
 						message.channel.send('You did not win any money, maybe next time!');
 					// eslint-disable-next-line brace-style
 					} else {
-						message.channel.send(`You won ${winnings}!`);
+						message.channel.send(`You won ${winnings2}!`);
 					}
 				} else {
 					message.channel.send('An error has occured.');

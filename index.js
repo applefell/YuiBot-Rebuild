@@ -6,7 +6,7 @@ const { globalPrefix, token } = require('./config.json');
 const Keyv = require('keyv');
 const client = new Client();
 const online = true;
-client.distube = new DisTube(client, { searchSongs: false, emitNewSongOnly: true });
+client.distube = new DisTube(client, { searchSongs: false, emitNewSongOnly: true, leaveOnFinish: true, leaveOnEmpty: true });
 const { Op } = require('sequelize');
 const moners = new Discord.Collection();
 const chalk = require('chalk');
@@ -65,6 +65,7 @@ function sleep(ms) {
 	return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+// eslint-disable-next-line no-unused-vars
 async function status() {
 	while(online == true) {
 		client.user.setPresence({ activity: { name: 'do [help for commands!' }, status: 'online' });
@@ -101,7 +102,7 @@ client.once('ready', async () => {
 	storedBalances.forEach(b => moners.set(b.user_id, b));
 	logger.log('info', chalk.greenBright.bold('Ready!'));
 	// status();
-	client.user.setPresence({ activity: { name: 'How do I write a funny status'}, status: 'online'});
+	client.user.setPresence({ activity: { name: 'How do I write a funny status' }, status: 'online' });
 });
 
 // for running commands

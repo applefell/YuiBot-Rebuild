@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const img = require('./special_functions/gif_switch.js');
+const img = require('./special_functions/switches');
 module.exports = {
 	name: 'gif',
 	description: 'Sends a random gif from the popular anime K-On!',
@@ -8,7 +8,7 @@ module.exports = {
 	execute(client, message, args) {
 		const ran = Math.floor(Math.random() * (32 - 1) + 1);
 
-		const gif = img.findImage(ran);
+		const gif = img.findGif(ran);
 
 		const imageEmbed = new Discord.MessageEmbed()
 			.setColor('#1dde47')

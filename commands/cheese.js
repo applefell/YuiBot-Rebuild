@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const img = require('./special_functions/cheese_switch');
+const img = require('./special_functions/switches');
 module.exports = {
 	name: 'cheese',
 	description: 'Sends a random picture of cheese!',

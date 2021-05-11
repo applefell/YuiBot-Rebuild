@@ -1,5 +1,5 @@
 /* eslint-disable brace-style */
-const gamble = require('./special_functions/gamble_roll_thing');
+const gamble = require('./special_functions/switches');
 const Discord = require('discord.js');
 
 module.exports = {

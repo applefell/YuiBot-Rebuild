@@ -4,8 +4,8 @@ module.exports = {
 	cooldown: 2,
 	guildOnly: true,
 	// eslint-disable-next-line no-unused-vars
-	execute(message, args) {
-		const { client, moners } = require('../index');
+	execute(client, message, args) {
+		const { moners } = require('../index');
 		message.channel.send(
 			moners.sort((a, b) => b.balance - a.balance)
 				.filter(user => client.users.cache.has(user.user_id))

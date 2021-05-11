@@ -6,7 +6,7 @@ module.exports = {
 	args: true,
 	usage: 'user to be kicked',
 	// eslint-disable-next-line no-unused-vars
-	execute(message, args) {
+	execute(client, message, args) {
 		if(message.member.hasPermission('KICK_MEMBERS')) {
 			const toBeKickedUser = message.mentions.users.first();
 			if(toBeKickedUser) {

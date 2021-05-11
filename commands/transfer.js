@@ -6,7 +6,7 @@ module.exports = {
 	cooldown: 2,
 	args: true,
 	guildOnly: true,
-	execute(message, args) {
+	execute(client, message, args) {
 		// eslint-disable-next-line no-undef
 		const currentAmount = moners.getBalance(message.author.id);
 		const transferAmount = args.find(arg => !/<@!?\d+>/.test(arg));

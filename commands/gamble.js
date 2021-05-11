@@ -1,4 +1,5 @@
-const gamble = require('./special_functions/gamble_roll_thing');
+/* eslint-disable brace-style */
+const gamble = require('./special_functions/switches');
 const Discord = require('discord.js');
 
 module.exports = {
@@ -8,7 +9,7 @@ module.exports = {
 	args: true,
 	usage: '(amount to gamble)',
 	// eslint-disable-next-line no-unused-vars
-	execute(message, args) {
+	execute(client, message, args) {
 		// get users balance and make sure that they aint spending more than they got, that means you IronicallyUncreative
 		const { moners } = require('../index');
 		const userAmount = moners.getBalance(message.author.id);

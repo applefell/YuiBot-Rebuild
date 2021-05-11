@@ -4,7 +4,7 @@ module.exports = {
 	cooldown: 2,
 	aliases: ['inv'],
 	// eslint-disable-next-line no-unused-vars
-	async execute(message, args) {
+	async execute(client, message, args) {
 		const { Users } = require('../index');
 		const target = message.mentions.users.first() || message.author;
 		const user = await Users.findOne({ where: { user_id: target.id } });

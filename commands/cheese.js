@@ -1,11 +1,11 @@
 const Discord = require('discord.js');
-const img = require('./special_functions/cheese_switch');
+const img = require('./special_functions/switches');
 module.exports = {
 	name: 'cheese',
 	description: 'Sends a random picture of cheese!',
 	cooldown: 2,
 	// eslint-disable-next-line no-unused-vars
-	execute(message, args) {
+	execute(client, message, args) {
 		const ran = Math.floor(Math.random() * (14 - 1) + 1);
 
 		const pic = img.findCheese(ran);

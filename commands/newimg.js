@@ -1,8 +1,5 @@
 const Discord = require('discord.js');
-const img_kon = require('./special_functions/image_switch');
-const img_bocchi = require('./special_functions/bocchi_switch');
-const img_imas = require('./special_functions/imas_switch');
-const img_ran = require('./special_functions/randomswitch');
+const img = require('./special_functions/switches');
 
 module.exports = {
 	name: 'image',
@@ -10,7 +7,7 @@ module.exports = {
 	cooldown: 5,
 	aliases: ['pics', 'picture'],
 	// eslint-disable-next-line no-unused-vars
-	execute(message, args) {
+	execute(client, message, args) {
 		const reaction_numbers = ['\u0030\u20E3', '\u0031\u20E3', '\u0032\u20E3', '\u0033\u20E3', '\u0034\u20E3', '\u0035\u20E3', '\u0036\u20E3', '\u0037\u20E3', '\u0038\u20E3', '\u0039\u20E3'];
 
 		const firstEmbed = new Discord.MessageEmbed()
@@ -35,7 +32,7 @@ module.exports = {
 
 					const ran = Math.floor(Math.random() * (989 - 1) + 1);
 
-					const pic = img_kon.findImage(ran);
+					const pic = img.findImage(ran);
 
 					const imageEmbed = new Discord.MessageEmbed()
 						.setColor('#1dde47')
@@ -49,7 +46,7 @@ module.exports = {
 
 					const ran = Math.floor(Math.random() * (60 - 1) + 1);
 
-					const pic = img_bocchi.findBocchi(ran);
+					const pic = img.findBocchi(ran);
 
 					const imageEmbed2 = new Discord.MessageEmbed()
 						.setColor('#1dde47')
@@ -63,7 +60,7 @@ module.exports = {
 
 					const ran = Math.floor(Math.random() * (353 - 1) + 1);
 
-					const pic = img_imas.findImas(ran);
+					const pic = img.findImas(ran);
 
 					const imageEmbed3 = new Discord.MessageEmbed()
 						.setColor('#1dde47')
@@ -77,7 +74,7 @@ module.exports = {
 
 					const ran = Math.floor(Math.random() * (3 - 1) + 1);
 
-					const pic = img_ran.randomSwitchHub(ran);
+					const pic = img.randomSwitchHub(ran);
 
 					const imageEmbed4 = new Discord.MessageEmbed()
 						.setColor('#1dde47')
@@ -106,7 +103,7 @@ module.exports = {
 
 					const ran = Math.floor(Math.random() * (989 - 1) + 1);
 
-					const pic = img_kon.findImage(ran);
+					const pic = img.findImage(ran);
 
 					const imageEmbed = new Discord.MessageEmbed()
 						.setColor('#1dde47')
@@ -121,7 +118,7 @@ module.exports = {
 
 					const ran = Math.floor(Math.random() * (60 - 1) + 1);
 
-					const pic = img_bocchi.findBocchi(ran);
+					const pic = img.findBocchi(ran);
 
 					const imageEmbed2 = new Discord.MessageEmbed()
 						.setColor('#1dde47')
@@ -136,7 +133,7 @@ module.exports = {
 
 					const ran = Math.floor(Math.random() * (353 - 1) + 1);
 
-					const pic = img_imas.findImas(ran);
+					const pic = img.findImas(ran);
 
 					const imageEmbed3 = new Discord.MessageEmbed()
 						.setColor('#1dde47')
@@ -151,7 +148,7 @@ module.exports = {
 
 					const ran = Math.floor(Math.random() * (4 - 1) + 1);
 
-					const pic = img_ran.randomSwitchHub(ran);
+					const pic = img.randomSwitchHub(ran);
 
 					const imageEmbed4 = new Discord.MessageEmbed()
 						.setColor('#1dde47')

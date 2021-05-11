@@ -3,7 +3,7 @@ module.exports = {
 	description: 'Rolls a magic 8 ball!',
 	cooldown: 2,
 	// eslint-disable-next-line no-unused-vars
-	execute(message, args) {
+	execute(client, message, args) {
 		const num = Math.floor(Math.random() * (20 - 1) + 1);
 		switch(num) {
 		case 1:

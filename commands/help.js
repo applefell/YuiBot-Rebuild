@@ -10,7 +10,7 @@ module.exports = {
 
 		if(!args.length) {
 			data.push('Here\'s a list of all my commands:');
-			data.push(commands.map(command => command.name).join(', ') + ', buy, sell, queue, nowplaying');
+			data.push(commands.map(command => command.name).join(', ') + ', buy, sell');
 			data.push(`\nYou can send \`${globalPrefix}help [command name]\` to get help with a specific command! \nYou can also join my discord server at: discord.gg/W3tvcam`);
 
 			return message.author.send(data, { split: true }).then(() => {
@@ -26,14 +26,6 @@ module.exports = {
 
 		if(name == 'buy') {
 			message.channel.send('**Name:** buy\n**Description:** Lets you buy stuff with your moners!\n**Usage:** `[buy (item name)`');
-		}
-
-		if(name == 'nowplaying') {
-			message.channel.send('**Name:** nowplaying\n**Description:** See what song is currently playing!');
-		}
-
-		if(name == 'queue') {
-			message.channel.send('**Name:** queue\n**Description:** Shows up to the next 10 songs in the queue!');
 		}
 
 		if(name == 'sell') {

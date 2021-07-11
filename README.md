@@ -13,8 +13,7 @@ A rebuild of my original YuiBot discord bot but cool now :sunglasses:
 * run `node index`
 
 # Goals
-- [ ] Fix database issues
-- [ ] Fix skip command
+- [x] Fix database issues
 - [ ] Add the ability to use items
 - [ ] Add more items with individual perks when used
 - [ ] Improved help command

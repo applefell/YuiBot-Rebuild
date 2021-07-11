@@ -40,7 +40,6 @@ module.exports = {
 						.setImage(`${pic}`);
 
 					message.author.send(imageEmbed);
-				// eslint-disable-next-line brace-style
 				} else if(message.content == '2') {
 					collector.stop();
 
@@ -54,7 +53,6 @@ module.exports = {
 						.setImage(`${pic}`);
 
 					message.author.send(imageEmbed2);
-				// eslint-disable-next-line brace-style
 				} else if(message.content == '3') {
 					collector.stop();
 
@@ -68,7 +66,6 @@ module.exports = {
 						.setImage(`${pic}`);
 
 					message.author.send(imageEmbed3);
-				// eslint-disable-next-line brace-style
 				} else if(message.content == '4') {
 					collector.stop();
 
@@ -82,14 +79,12 @@ module.exports = {
 						.setImage(`${pic}`);
 
 					message.author.send(imageEmbed4);
-				// eslint-disable-next-line brace-style
 				} else {
 					collector.stop();
 					message.channel.bulkDelete(2);
 					message.author.send('You have to respond with an error 1-4.');
 				}
 			});
-		// eslint-disable-next-line brace-style
 		} else if(message.channel.type == 'text') {
 			message.channel.send(firstEmbed);
 
@@ -111,7 +106,6 @@ module.exports = {
 						.setImage(`${pic}`);
 
 					message.channel.send(imageEmbed);
-				// eslint-disable-next-line brace-style
 				} else if(message.content == '2') {
 					collector.stop();
 					message.channel.bulkDelete(3);
@@ -126,7 +120,6 @@ module.exports = {
 						.setImage(`${pic}`);
 
 					message.channel.send(imageEmbed2);
-				// eslint-disable-next-line brace-style
 				} else if(message.content == '3') {
 					collector.stop();
 					message.channel.bulkDelete(3);
@@ -141,7 +134,6 @@ module.exports = {
 						.setImage(`${pic}`);
 
 					message.channel.send(imageEmbed3);
-				// eslint-disable-next-line brace-style
 				} else if(message.content == '4') {
 					collector.stop();
 					message.channel.bulkDelete(3);
@@ -156,14 +148,12 @@ module.exports = {
 						.setImage(`${pic}`);
 
 					message.channel.send(imageEmbed4);
-				// eslint-disable-next-line brace-style
 				} else {
 					collector.stop();
 					message.channel.bulkDelete(2);
 					message.channel.send('You have to respond with a number 1-4.');
 				}
 			});
-		// eslint-disable-next-line brace-style
 		} else {
 			message.reply('There was an error determining the channel type.');
 		}

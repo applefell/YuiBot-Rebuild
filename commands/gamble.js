@@ -1,4 +1,3 @@
-/* eslint-disable brace-style */
 const gamble = require('./special_functions/switches');
 const Discord = require('discord.js');
 
@@ -10,79 +9,94 @@ module.exports = {
 	usage: '(amount to gamble)',
 	// eslint-disable-next-line no-unused-vars
 	execute(client, message, args) {
-		// get users balance and make sure that they aint spending more than they got, that means you IronicallyUncreative
-		const { moners } = require('../index');
-		const userAmount = moners.getBalance(message.author.id);
-		const gambleAmount = Number(args);
-		// make sure people gamble money instead of strings
-		if(typeof gambleAmount === 'number') {
-			if(gambleAmount === 0) {
-				return message.channel.send('You have to gamble at least $1.');
-			} else if(gambleAmount <= 1) {
-				// actually check how much they got to what they gamblin
-				if(gambleAmount > userAmount) {
-					message.channel.send('You can\'t gamble more money than you have!');
-				} else if(gambleAmount < userAmount) {
-					// generate random numbers to gamble with
-					const ran1 = Math.floor(Math.random() * (15 - 1) + 1);
-					const ran2 = Math.floor(Math.random() * (15 - 1) + 1);
-					const ran3 = Math.floor(Math.random() * (15 - 1) + 1);
+		// Gather user data
+		client.Users.findOne({
+			user_id: message.author.id,
+		}, (err, data) => {
+			if (err) client.logger.log('error', client.chalk.redBright(err));
+			if (!data) {
+				const newData = new client.Users({
+					user_id: message.author.id,
+					balance: 0,
+					xp: 0,
+					level: 0,
+					xp_cooldown: Date.now(),
+					hugs: 0,
+					punches: 0,
+					cries: 0,
+				});
+				newData.save().catch(err => client.logger.log('error', client.chalk.redBright(err)));
+				return message.channel.send('You can\'t gamble more money than you have!');
+			} else if (data) {
+				// Get amount to be gambled
+				const gambleAmount = Number(args[0]);
 
-					// 1-5 = apple, 6-9 = cherry, 10-12 = melon, 13-14 = cheese, 15 = burger
-					// get rid of money spent
-					moners.add(message.author.id, -gambleAmount);
+				// Make sure gambleAmount is a number
+				if (typeof gambleAmount === 'number') {
+					// Make sure people do not gamble 0
+					if (gambleAmount === 0) {
+						message.channel.send('You have to gamble at least $1');
+					} else if (gambleAmount >= 1) {
+						// Check to see if the user can afford to gamble that much
+						if (gambleAmount > data.balance) {
+							message.channel.send('You can\'t gamble more money than you have!');
+						} else if (gambleAmount < data.balance) {
+							// Generate random numbers to gamble with
+							const ran1 = Math.floor(Math.random() * (15 - 1) + 1);
+							const ran2 = Math.floor(Math.random() * (15 - 1) + 1);
+							const ran3 = Math.floor(Math.random() * (15 - 1) + 1);
 
-					// convert number to fruit
-					const ran1Fruit = gamble.gambleRoll(ran1);
-					const ran2Fruit = gamble.gambleRoll(ran2);
-					const ran3Fruit = gamble.gambleRoll(ran3);
+							// Get rid of money spent
+							data.balance -= gambleAmount;
 
-					// convert number into value
-					const ran1Value = gamble.gambleValue(ran1);
-					const ran2Value = gamble.gambleValue(ran2);
-					const ran3Value = gamble.gambleValue(ran3);
+							// Convert random numbers into fruit
+							const ran1Fruit = gamble.gambleRoll(ran1);
+							const ran2Fruit = gamble.gambleRoll(ran2);
+							const ran3Fruit = gamble.gambleRoll(ran3);
 
-					// get number for math from value
-					const mult = gamble.payout(ran1Value, ran2Value, ran3Value);
+							// Convert random numbers into value
+							const ran1Value = gamble.gambleValue(ran1);
+							const ran2Value = gamble.gambleValue(ran2);
+							const ran3Value = gamble.gambleValue(ran3);
 
-					// calculate winnings
-					const winnings = gambleAmount * mult;
+							// Get number for math from value
+							const mult = gamble.payout(ran1Value, ran2Value, ran3Value);
 
-					// round winnings up to two decimal places
-					const winnings2 = winnings.toFixed(2);
+							// Calculate winnings
+							const winnings = gambleAmount * mult;
 
-					// give user winnings
-					moners.add(message.author.id, winnings2);
+							// Give user winnings
+							data.balance += winnings;
 
-					// choose color for embed
-					const color = gamble.color(mult);
+							// Choose color for embed
+							const color = gamble.color(mult);
 
-					// choose title for embed
-					const titleRan = Math.floor(Math.random() * (3 - 1) + 1);
-					const title = gamble.title(titleRan);
+							// Choose title for embed
+							const titleRan = Math.floor(Math.random() * (3 - 1) + 1);
+							const title = gamble.title(titleRan);
 
-					// send message showing results
-					const embed = new Discord.MessageEmbed()
-						.setColor(`${color}`)
-						.setTimestamp()
-						.setTitle(`${title}`)
-						.setDescription(`${ran1Fruit}${ran2Fruit}${ran3Fruit}`);
+							// Send message showing results
+							const embed = new Discord.MessageEmbed()
+								.setColor(`${color}`)
+								.setTimestamp()
+								.setTitle(`${title}`)
+								.setDescription(`${ran1Fruit}${ran2Fruit}${ran3Fruit}`);
 
-					message.channel.send(embed);
+							message.channel.send(embed);
 
-					// send message showing winnings
-					if(mult == 0) {
-						message.channel.send('You did not win any money, maybe next time!');
-					// eslint-disable-next-line brace-style
-					} else {
-						message.channel.send(`You won ${winnings2}!`);
+							// Send message showing winnings
+							if(mult == 0) {
+								message.channel.send('You did not win any money, maybe next time!');
+							} else {
+								message.channel.send(`You won ${winnings}`);
+							}
+							data.save().catch(err => client.logger.log('error', client.chalk.redBright(err)));
+						}
 					}
 				} else {
-					message.channel.send('An error has occured.');
+					message.channel.send('You have to gamble money!');
 				}
 			}
-		} else {
-			message.channel.send('You have to gamble money!');
-		}
+		});
 	},
 };

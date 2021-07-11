@@ -1,17 +1,8 @@
-module.exports = (sequelize, DataTypes) => {
-	return sequelize.define('currency_shop', {
-		name: {
-			type: DataTypes.STRING,
-			unique: true,
-		},
-		cost: {
-			type: DataTypes.INTEGER,
-			allowNull: false,
-		},
-		usable: {
-			type: DataTypes.INTEGER,
-		},
-	}, {
-		timestamps: false,
-	});
-};
+const mongoose = require('mongoose');
+const shopSchem = mongoose.Schema({
+	name: String,
+	cost: Number,
+	usable: Number,
+});
+
+module.exports = mongoose.model('Shop', shopSchem);

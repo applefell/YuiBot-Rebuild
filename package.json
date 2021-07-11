@@ -1,6 +1,6 @@
 {
   "name": "yuibot-rebuild",
-  "version": "1.0.0",
+  "version": "1.2.2",
   "description": "A rebuild of my original YuiBot discord bot but cool now :sunglasses:",
   "main": "index.js",
   "dependencies": {

@@ -4,8 +4,6 @@ module.exports = {
 	cooldown: 2,
 	// eslint-disable-next-line no-unused-vars
 	async execute(client, message, args) {
-		const { Shop } = require('../index');
-		const items = await Shop.findAll();
-		message.channel.send(items.map(i => `${i.name}: ${i.cost}`).join('\n'), { code: true });
+		message.channel.send('cake: $5\ntea: $1\ncoffee: $2', { code: true });
 	},
 };

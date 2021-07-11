@@ -1,15 +1,13 @@
-module.exports = (sequelize, DataTypes) => {
-	return sequelize.define('users', {
-		user_id: {
-			type: DataTypes.STRING,
-			primaryKey: true,
-		},
-		balance: {
-			type: DataTypes.INTEGER,
-			defaultValue: 0,
-			allowNull: false,
-		},
-	}, {
-		timestamps: false,
-	});
-};
+const mongoose = require('mongoose');
+const userSchem = mongoose.Schema({
+	user_id: String,
+	balance: Number,
+	xp: Number,
+	level: Number,
+	xp_cooldown: Number,
+	hugs: Number,
+	punches: Number,
+	cries: Number,
+});
+
+module.exports = mongoose.model('Users', userSchem);

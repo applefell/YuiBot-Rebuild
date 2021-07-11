@@ -18,15 +18,12 @@ module.exports = {
 						message.channel.send('I am unable to ban that member.');
 						console.error(err);
 					});
-				// eslint-disable-next-line brace-style
 				} else {
 					message.channel.send('That member is not in this server.');
 				}
-			// eslint-disable-next-line brace-style
 			} else {
 				message.channel.send('You need to mention a user!');
 			}
-		// eslint-disable-next-line brace-style
 		} else {
 			message.channel.send('You don\'t have permission to ban members!');
 		}

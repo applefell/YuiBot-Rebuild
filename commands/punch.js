@@ -21,7 +21,6 @@ module.exports = {
 				.setTimestamp()
 				.setImage(`${img}`);
 			message.channel.send(embed);
-		// eslint-disable-next-line brace-style
 		} else if(!target1) {
 			message.channel.send('You have to tag a user!');
 		}

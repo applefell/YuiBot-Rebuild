@@ -13,7 +13,6 @@ module.exports = {
 			const newCommand = require(`./${command.name}.js`);
 			message.client.commands.set(newCommand.name, newCommand);
 			message.channel.send(`Command \`${command.name}\` was reloaded!`);
-		// eslint-disable-next-line brace-style
 		} catch(error) {
 			console.error(error);
 			message.channel.send(`There was and error while reloading a command \`${command.name}\`:\n\`${error.message}\``);

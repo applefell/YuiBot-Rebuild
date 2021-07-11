@@ -22,7 +22,6 @@ module.exports = {
 				.setTimestamp()
 				.setImage(`${img}`);
 			message.channel.send(embed);
-		// eslint-disable-next-line brace-style
 		} else if(!target1) {
 			const img = hug.findHug(ran);
 			const embed = new Discord.MessageEmbed()

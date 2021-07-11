@@ -22,7 +22,6 @@ module.exports = {
 				.setTitle(`${target2.username} made ${author.username} cry!`)
 				.setImage(`${img}`);
 			message.channel.send(embed);
-		// eslint-disable-next-line brace-style
 		} else if(!target1) {
 			const img = cry.findCry(ran);
 			const embed = new Discord.MessageEmbed()

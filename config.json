@@ -1,4 +1,5 @@
 {
-	"globalPrefix": "]",
-	"token": "insert token"
+	"globalPrefix": "[",
+	"token": "bot token here",
+	"mongoPass": "mongodb key here"
 }

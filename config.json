@@ -1,5 +1,11 @@
 {
 	"globalPrefix": "[",
+<<<<<<< Updated upstream
 	"token": "bot token here",
 	"mongoPass": "mongodb key here"
+=======
+	"token": "Bot token",
+	"mongoPass": "MongoDB token",
+	"owner": "Bot owners ID"
+>>>>>>> Stashed changes
 }

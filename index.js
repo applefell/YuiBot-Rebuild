@@ -1,7 +1,11 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const Client = require('./client/Client');
+<<<<<<< Updated upstream
 const { globalPrefix, token, mongoPass } = require('./config.json');
+=======
+const { globalPrefix, token, mongoPass, owner } = require('./config.json');
+>>>>>>> Stashed changes
 const client = new Client();
 const { shopInit } = require('./models/shopinit');
 const online = true;
@@ -119,6 +123,7 @@ client.on('message', async message => {
 					data.save().catch(err => client.logger.log(client.chalk.redBright(err)));
 				}
 			});
+<<<<<<< Updated upstream
 		}
 
 		// Gives users somewhere between 1 and 7 xp if the xp cooldown is up
@@ -156,6 +161,56 @@ client.on('message', async message => {
 
 		const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
+=======
+		}
+
+		// Gives users somewhere between 1 and 7 xp if the xp cooldown is up
+		client.Users.findOne({
+			user_id: message.author.id,
+		}, (err, data) => {
+			if(err) client.logger.log('error', client.chalk.redBright(err));
+			if(!data) {
+				const newData = new client.Users({
+					user_id: message.author.id,
+					balance: 0,
+					xp: potential_xp,
+					level: 0,
+					xp_cooldown: Date.now(),
+					hugs: 0,
+					punches: 0,
+					cries: 0,
+				});
+				newData.save().catch(err => client.logger.log('error', client.chalk.redBright(err)));
+			} else if(data) {
+				if(Date.now() - data.xp_cooldown > 120000) {
+					data.xp += potential_xp;
+					data.xp_cooldown = Date.now();
+					data.save().catch(err => client.logger.log('error', client.chalk.redBright(err)));
+				} else {
+					return;
+				}
+			}
+		});
+	}
+
+	// Feels jank, improve later??
+	function doTheThing(args) {
+		const commandName = args.shift().toLowerCase();
+
+		if (commandName === 'status') {
+			const ID = message.author.id;
+			if (ID === owner) {
+				const stat = args.join(' ');
+				client.user.setActivity(`${stat}`, { type: 'PLAYING' });
+				client.logger.log('info', client.chalk.greenBright.bold('Manually set status'));
+			} else if (ID != owner) {
+				message.channel.send('Hey! You can\'t do that!');
+			}
+		}
+
+		const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
+
+>>>>>>> Stashed changes
 		if(!command) return;
 
 		// checks if a command can only be used in a guild
@@ -197,7 +252,11 @@ client.on('message', async message => {
 
 		try {
 			command.execute(client, message, args);
+<<<<<<< Updated upstream
 		} catch(error) {
+=======
+		} catch (error) {
+>>>>>>> Stashed changes
 			client.logger.log('error', client.chalk.redBright(error));
 			message.reply('An error occured while executing that command.');
 		}
@@ -241,6 +300,10 @@ client.on('message', async message => {
 		// If a prefix was found, set up args. If no prefix, not a command
 		if (!prefixToUse) return;
 		args = message.content.slice(prefixToUse.length).trim().split(/ +/);
+<<<<<<< Updated upstream
+=======
+		doTheThing(args);
+>>>>>>> Stashed changes
 	} else {
 		// For DMs so they still work
 		const slice = message.content.startsWith(globalPrefix) ? globalPrefix.length : 0;

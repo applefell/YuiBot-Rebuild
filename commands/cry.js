@@ -22,6 +22,30 @@ module.exports = {
 				.setTitle(`${target2.username} made ${author.username} cry!`)
 				.setImage(`${img}`);
 			message.channel.send(embed);
+<<<<<<< Updated upstream
+=======
+			client.Users.findOne({
+				user_id: message.author.id,
+			}, (err, data) => {
+				if (err) client.logger.log('error', client.chalk.redBright(err));
+				if (!data) {
+					const newData = new client.Users({
+						user_id: message.author.id,
+						balance: 0,
+						xp: 0,
+						level: 0,
+						xp_cooldown: 900000000,
+						hugs: 0,
+						punches: 0,
+						cries: 1,
+					});
+					newData.save().catch(err => client.logger.log('error', client.chalk.redBright(err)));
+				} else if (data) {
+					data.cries += 1;
+					data.save().catch(err => client.logger.log('error', client.chalk.redBright(err)));
+				}
+			});
+>>>>>>> Stashed changes
 		} else if(!target1) {
 			const img = cry.findCry(ran);
 			const embed = new Discord.MessageEmbed()

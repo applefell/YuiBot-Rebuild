@@ -1,11 +1,7 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const Client = require('./client/Client');
-<<<<<<< Updated upstream
-const { globalPrefix, token, mongoPass } = require('./config.json');
-=======
 const { globalPrefix, token, mongoPass, owner } = require('./config.json');
->>>>>>> Stashed changes
 const client = new Client();
 const { shopInit } = require('./models/shopinit');
 const online = true;
@@ -158,8 +154,6 @@ client.on('message', async message => {
 	function doTheThing(args) {
 		const commandName = args.shift().toLowerCase();
 
-<<<<<<< Updated upstream
-=======
 		if (commandName === 'status') {
 			const ID = message.author.id;
 			if (ID === owner) {
@@ -171,7 +165,6 @@ client.on('message', async message => {
 			}
 		}
 
->>>>>>> Stashed changes
 		const command = client.commands.get(commandName) || client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
 		if(!command) return;
@@ -215,11 +208,7 @@ client.on('message', async message => {
 
 		try {
 			command.execute(client, message, args);
-<<<<<<< Updated upstream
-		} catch(error) {
-=======
 		} catch (error) {
->>>>>>> Stashed changes
 			client.logger.log('error', client.chalk.redBright(error));
 			message.reply('An error occured while executing that command.');
 		}
@@ -263,10 +252,7 @@ client.on('message', async message => {
 		// If a prefix was found, set up args. If no prefix, not a command
 		if (!prefixToUse) return;
 		args = message.content.slice(prefixToUse.length).trim().split(/ +/);
-<<<<<<< Updated upstream
-=======
 		doTheThing(args);
->>>>>>> Stashed changes
 	} else {
 		// For DMs so they still work
 		const slice = message.content.startsWith(globalPrefix) ? globalPrefix.length : 0;

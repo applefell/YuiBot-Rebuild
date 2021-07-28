@@ -22,8 +22,6 @@ module.exports = {
 				.setTimestamp()
 				.setImage(`${img}`);
 			message.channel.send(embed);
-<<<<<<< Updated upstream
-=======
 			client.Users.findOne({
 				user_id: message.author.id,
 			}, (err, data) => {
@@ -45,7 +43,6 @@ module.exports = {
 					data.save().catch(err => client.logger.log('error', client.chalk.redBright(err)));
 				}
 			});
->>>>>>> Stashed changes
 		} else if(!target1) {
 			const img = hug.findHug(ran);
 			const embed = new Discord.MessageEmbed()

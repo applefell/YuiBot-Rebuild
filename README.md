@@ -16,9 +16,9 @@ A rebuild of my original YuiBot discord bot but cool now :sunglasses:
 - [ ] Add the ability to use items
 - [ ] Add more items with individual perks when used
 - [ ] Improved help command
-- [ ] Improved image command
+- [x] Improved image command
 - [ ] Add more moderation features (tempbans, mutes, etc)
-- [ ] Search images from sites like safebooru
-- [ ] Add levelling system
+- [x] Search images from sites like safebooru
+- [x] Add levelling system
 - [ ] Add integration to a website
 - [ ] Add support for sharding

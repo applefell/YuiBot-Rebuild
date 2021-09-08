@@ -1,8 +1,11 @@
 # YuiBot-Rebuild
 A rebuild of my original YuiBot discord bot but cool now :sunglasses:
 
+# NO LONGER GETTING UPDATED
+For more recent updates go to [YuiBot-v13](https://github.com/applefell/YuiBot-v13)
+
 # Requirements
-* 64-bit operating system
+* Computer
 
 # Running the bot
 * unzip the .zip file the bot comes in

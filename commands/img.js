@@ -5,155 +5,161 @@ module.exports = {
 	name: 'image',
 	description: 'The new and improved image command!',
 	cooldown: 5,
-	aliases: ['pics', 'picture'],
+	aliases: ['pics', 'picture', 'img'],
 	// eslint-disable-next-line no-unused-vars
-	execute(client, message, args) {
-		const reaction_numbers = ['\u0030\u20E3', '\u0031\u20E3', '\u0032\u20E3', '\u0033\u20E3', '\u0034\u20E3', '\u0035\u20E3', '\u0036\u20E3', '\u0037\u20E3', '\u0038\u20E3', '\u0039\u20E3'];
-
+	async execute(client, message, args) {
 		const firstEmbed = new Discord.MessageEmbed()
 			.setColor('#1dde47')
 			.setTimestamp()
 			.setTitle('Choose where you want to see a screenshot from!')
 			.setDescription('Respond with the number correlating to your option!')
-			.addField(`${reaction_numbers[1]}`, '[K-On!](https://myanimelist.net/anime/5680/K-On)', true)
-			.addField(`${reaction_numbers[2]}`, '[Hitoribocchi no\nMarumaru Seikatsu](https://myanimelist.net/anime/37614/hitoribocchi_no_marumaru_seikatsu)', true)
-			.addField(`${reaction_numbers[3]}`, '[The iDOLM@STER\nCinderella Girls](https://myanimelist.net/anime/23587/The_iDOLMSTER_Cinderella_Girls)', true)
-			.addField(`${reaction_numbers[4]}`, 'Random', true);
+			.addField('<:Yui1:870466403910701062>', '[K-On!](https://myanimelist.net/anime/5680/K-On)', true)
+			.addField('<:NakoGlasses:870466404112031804>', '[Hitoribocchi](https://myanimelist.net/anime/37614/hitoribocchi_no_marumaru_seikatsu)', true)
+			.addField('<:Weh:870466404011347990>', '[Cinderella Girls](https://myanimelist.net/anime/23587/The_iDOLMSTER_Cinderella_Girls)', true)
+			.addField('<:Random:870466403831013417>', 'Random', true);
 
 		if(message.channel.type == 'dm') {
-			message.author.send(firstEmbed);
+			const m = await message.channel.send(firstEmbed);
+			await m.react('870466403910701062');
+			await m.react('870466404112031804');
+			await m.react('870466404011347990');
+			await m.react('870466403831013417');
 
-			const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
+			const filter = (reaction, user) => {
+				return (
+					['Yui1', 'NakoGlasses', 'Weh', 'Random'].includes(reaction.emoji.name) && user.id === message.author.id
+				);
+			};
 
-			// eslint-disable-next-line no-shadow
-			collector.on('collect', message => {
-				if(message.content == '1') {
-					collector.stop();
+			m.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+				.then((collected) => {
+					const reaction = collected.first();
 
-					const ran = Math.floor(Math.random() * (989 - 1) + 1);
+					if (reaction.emoji.name === 'Yui1') {
+						m.delete();
 
-					const pic = img.findImage(ran);
+						const ran = Math.floor(Math.random() * (989 - 1) + 1);
 
-					const imageEmbed = new Discord.MessageEmbed()
-						.setColor('#1dde47')
-						.setTimestamp()
-						.setImage(`${pic}`);
+						const pic = img.findImage(ran);
 
-					message.author.send(imageEmbed);
-				} else if(message.content == '2') {
-					collector.stop();
+						const imageEmbed = new Discord.MessageEmbed()
+							.setColor('#1dde47')
+							.setTimestamp()
+							.setImage(`${pic}`);
 
-					const ran = Math.floor(Math.random() * (60 - 1) + 1);
+						return message.author.send(imageEmbed);
+					} else if (reaction.emoji.name === 'NakoGlasses') {
+						m.delete();
 
-					const pic = img.findBocchi(ran);
+						const ran = Math.floor(Math.random() * (60 - 1) + 1);
 
-					const imageEmbed2 = new Discord.MessageEmbed()
-						.setColor('#1dde47')
-						.setTimestamp()
-						.setImage(`${pic}`);
+						const pic = img.findBocchi(ran);
 
-					message.author.send(imageEmbed2);
-				} else if(message.content == '3') {
-					collector.stop();
+						const imageEmbed2 = new Discord.MessageEmbed()
+							.setColor('#1dde47')
+							.setTimestamp()
+							.setImage(`${pic}`);
 
-					const ran = Math.floor(Math.random() * (353 - 1) + 1);
+						return message.author.send(imageEmbed2);
+					} else if (reaction.emoji.name === 'Weh') {
+						m.delete();
 
-					const pic = img.findImas(ran);
+						const ran = Math.floor(Math.random() * (353 - 1) + 1);
 
-					const imageEmbed3 = new Discord.MessageEmbed()
-						.setColor('#1dde47')
-						.setTimestamp()
-						.setImage(`${pic}`);
+						const pic = img.findImas(ran);
 
-					message.author.send(imageEmbed3);
-				} else if(message.content == '4') {
-					collector.stop();
+						const imageEmbed3 = new Discord.MessageEmbed()
+							.setColor('#1dde47')
+							.setTimestamp()
+							.setImage(`${pic}`);
 
-					const ran = Math.floor(Math.random() * (3 - 1) + 1);
+						return message.author.send(imageEmbed3);
+					} else if (reaction.emoji.name === 'Random') {
+						m.delete();
 
-					const pic = img.randomSwitchHub(ran);
+						const ran = Math.floor(Math.random() * (3 - 1) + 1);
 
-					const imageEmbed4 = new Discord.MessageEmbed()
-						.setColor('#1dde47')
-						.setTimestamp()
-						.setImage(`${pic}`);
+						const pic = img.randomSwitchHub(ran);
 
-					message.author.send(imageEmbed4);
-				} else {
-					collector.stop();
-					message.channel.bulkDelete(2);
-					message.author.send('You have to respond with an error 1-4.');
-				}
-			});
+						const imageEmbed4 = new Discord.MessageEmbed()
+							.setColor('#1dde47')
+							.setTimestamp()
+							.setImage(`${pic}`);
+
+						return message.author.send(imageEmbed4);
+					}
+				});
 		} else if(message.channel.type == 'text') {
-			message.channel.send(firstEmbed);
+			const m = await message.channel.send(firstEmbed);
+			await m.react('870466403910701062');
+			await m.react('870466404112031804');
+			await m.react('870466404011347990');
+			await m.react('870466403831013417');
 
-			const collector = new Discord.MessageCollector(message.channel, m => m.author.id === message.author.id, { time: 10000 });
+			const filter = (reaction, user) => {
+				return (
+					['Yui1', 'NakoGlasses', 'Weh', 'Random'].includes(reaction.emoji.name) && user.id === message.author.id
+				);
+			};
 
-			// eslint-disable-next-line no-shadow
-			collector.on('collect', message => {
-				if(message.content == '1') {
-					collector.stop();
-					message.channel.bulkDelete(3);
+			m.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+				.then((collected) => {
+					const reaction = collected.first();
 
-					const ran = Math.floor(Math.random() * (989 - 1) + 1);
+					if (reaction.emoji.name === 'Yui1') {
+						m.delete();
 
-					const pic = img.findImage(ran);
+						const ran = Math.floor(Math.random() * (989 - 1) + 1);
 
-					const imageEmbed = new Discord.MessageEmbed()
-						.setColor('#1dde47')
-						.setTimestamp()
-						.setImage(`${pic}`);
+						const pic = img.findImage(ran);
 
-					message.channel.send(imageEmbed);
-				} else if(message.content == '2') {
-					collector.stop();
-					message.channel.bulkDelete(3);
+						const imageEmbed = new Discord.MessageEmbed()
+							.setColor('#1dde47')
+							.setTimestamp()
+							.setImage(`${pic}`);
 
-					const ran = Math.floor(Math.random() * (60 - 1) + 1);
+						return message.channel.send(imageEmbed);
+					} else if (reaction.emoji.name === 'NakoGlasses') {
+						m.delete();
 
-					const pic = img.findBocchi(ran);
+						const ran = Math.floor(Math.random() * (60 - 1) + 1);
 
-					const imageEmbed2 = new Discord.MessageEmbed()
-						.setColor('#1dde47')
-						.setTimestamp()
-						.setImage(`${pic}`);
+						const pic = img.findBocchi(ran);
 
-					message.channel.send(imageEmbed2);
-				} else if(message.content == '3') {
-					collector.stop();
-					message.channel.bulkDelete(3);
+						const imageEmbed2 = new Discord.MessageEmbed()
+							.setColor('#1dde47')
+							.setTimestamp()
+							.setImage(`${pic}`);
 
-					const ran = Math.floor(Math.random() * (353 - 1) + 1);
+						return message.channel.send(imageEmbed2);
+					} else if (reaction.emoji.name === 'Weh') {
+						m.delete();
 
-					const pic = img.findImas(ran);
+						const ran = Math.floor(Math.random() * (353 - 1) + 1);
 
-					const imageEmbed3 = new Discord.MessageEmbed()
-						.setColor('#1dde47')
-						.setTimestamp()
-						.setImage(`${pic}`);
+						const pic = img.findImas(ran);
 
-					message.channel.send(imageEmbed3);
-				} else if(message.content == '4') {
-					collector.stop();
-					message.channel.bulkDelete(3);
+						const imageEmbed3 = new Discord.MessageEmbed()
+							.setColor('#1dde47')
+							.setTimestamp()
+							.setImage(`${pic}`);
 
-					const ran = Math.floor(Math.random() * (4 - 1) + 1);
+						return message.channel.send(imageEmbed3);
+					} else if (reaction.emoji.name === 'Random') {
+						m.delete();
 
-					const pic = img.randomSwitchHub(ran);
+						const ran = Math.floor(Math.random() * (3 - 1) + 1);
 
-					const imageEmbed4 = new Discord.MessageEmbed()
-						.setColor('#1dde47')
-						.setTimestamp()
-						.setImage(`${pic}`);
+						const pic = img.randomSwitchHub(ran);
 
-					message.channel.send(imageEmbed4);
-				} else {
-					collector.stop();
-					message.channel.bulkDelete(2);
-					message.channel.send('You have to respond with a number 1-4.');
-				}
-			});
+						const imageEmbed4 = new Discord.MessageEmbed()
+							.setColor('#1dde47')
+							.setTimestamp()
+							.setImage(`${pic}`);
+
+						return message.channel.send(imageEmbed4);
+					}
+				});
 		} else {
 			message.reply('There was an error determining the channel type.');
 		}

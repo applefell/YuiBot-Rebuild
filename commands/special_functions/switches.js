@@ -1,3 +1,4 @@
+/* eslint-disable no-inline-comments */
 // eslint-disable-next-line no-unused-vars
 function findHug(ran) {
 	switch(ran) {
@@ -73,21 +74,21 @@ function gambleValue(ran) {
 	case 5:
 		return 1;
 	case 6:
-		return 2;
+		return 1;
 	case 7:
-		return 2;
+		return 1;
 	case 8:
 		return 2;
 	case 9:
 		return 2;
 	case 10:
-		return 3;
+		return 2;
 	case 11:
 		return 3;
 	case 12:
 		return 3;
 	case 13:
-		return 4;
+		return 3;
 	case 14:
 		return 4;
 	case 15:
@@ -124,10 +125,82 @@ function payout(ran1Value, ran2Value, ran3Value) {
 		return 1;
 	} else if(ran1Value == 2 && ran2Value == 2 && ran3Value == 2) {
 		return 1.5;
+	} else if(ran1Value == 2 && ran2Value == 2 && ran3Value == 1) {
+		return 1.1;
+	} else if(ran1Value == 2 && ran2Value == 2 && ran3Value == 3) {
+		return 1.1;
+	} else if(ran1Value == 2 && ran2Value == 2 && ran3Value == 4) {
+		return 1.1;
+	} else if(ran1Value == 2 && ran2Value == 2 && ran3Value == 5) {
+		return 1.1;
+	} else if(ran1Value == 2 && ran2Value == 1 && ran3Value == 2) {
+		return 1.1;
+	} else if(ran1Value == 2 && ran2Value == 3 && ran3Value == 2) {
+		return 1.1;
+	} else if(ran1Value == 2 && ran2Value == 4 && ran3Value == 2) {
+		return 1.1;
+	} else if(ran1Value == 2 && ran2Value == 5 && ran3Value == 2) {
+		return 1.1;
+	} else if(ran1Value == 1 && ran2Value == 2 && ran3Value == 2) {
+		return 1.1;
+	} else if(ran1Value == 3 && ran2Value == 2 && ran3Value == 2) {
+		return 1.1;
+	} else if(ran1Value == 4 && ran2Value == 2 && ran3Value == 2) {
+		return 1.1;
+	} else if(ran1Value == 5 && ran2Value == 2 && ran3Value == 2) {
+		return 1.1;
 	} else if(ran1Value == 3 && ran2Value == 3 && ran3Value == 3) {
 		return 1.75;
+	} else if(ran1Value == 1 && ran2Value == 3 && ran3Value == 3) {
+		return 1.2;
+	} else if(ran1Value == 2 && ran2Value == 3 && ran3Value == 3) {
+		return 1.2;
+	} else if(ran1Value == 4 && ran2Value == 3 && ran3Value == 3) {
+		return 1.2;
+	} else if(ran1Value == 5 && ran2Value == 3 && ran3Value == 3) {
+		return 1.2;
+	} else if(ran1Value == 3 && ran2Value == 1 && ran3Value == 3) {
+		return 1.2;
+	} else if(ran1Value == 3 && ran2Value == 2 && ran3Value == 3) {
+		return 1.2;
+	} else if(ran1Value == 3 && ran2Value == 4 && ran3Value == 3) {
+		return 1.2;
+	} else if(ran1Value == 3 && ran2Value == 5 && ran3Value == 3) {
+		return 1.2;
+	} else if(ran1Value == 3 && ran2Value == 3 && ran3Value == 1) {
+		return 1.2;
+	} else if(ran1Value == 3 && ran2Value == 3 && ran3Value == 2) {
+		return 1.2;
+	} else if(ran1Value == 3 && ran2Value == 3 && ran3Value == 4) {
+		return 1.2;
+	} else if(ran1Value == 3 && ran2Value == 3 && ran3Value == 5) {
+		return 1.2;
 	} else if(ran1Value == 4 && ran2Value == 4 && ran3Value == 4) {
 		return 2;
+	} else if(ran1Value == 1 && ran2Value == 4 && ran3Value == 4) {
+		return 1.3;
+	} else if(ran1Value == 2 && ran2Value == 4 && ran3Value == 4) {
+		return 1.3;
+	} else if(ran1Value == 3 && ran2Value == 4 && ran3Value == 4) {
+		return 1.3;
+	} else if(ran1Value == 5 && ran2Value == 4 && ran3Value == 4) {
+		return 1.3;
+	} else if(ran1Value == 4 && ran2Value == 1 && ran3Value == 4) {
+		return 1.3;
+	} else if(ran1Value == 4 && ran2Value == 2 && ran3Value == 4) {
+		return 1.3;
+	} else if(ran1Value == 4 && ran2Value == 3 && ran3Value == 4) {
+		return 1.3;
+	} else if(ran1Value == 4 && ran2Value == 5 && ran3Value == 4) {
+		return 1.3;
+	} else if(ran1Value == 4 && ran2Value == 4 && ran3Value == 1) {
+		return 1.3;
+	} else if(ran1Value == 4 && ran2Value == 4 && ran3Value == 2) {
+		return 1.3;
+	} else if(ran1Value == 4 && ran2Value == 4 && ran3Value == 3) {
+		return 1.3;
+	} else if(ran1Value == 4 && ran2Value == 4 && ran3Value == 5) {
+		return 1.3;
 	} else if(ran1Value == 5 && ran2Value == 5 && ran3Value == 5) {
 		return 3;
 	} else {
@@ -3159,4 +3232,31 @@ function findPunch(ran) {
 	}
 }
 
-module.exports = { findHug, title, color, payout, gambleRoll, gambleValue, findGif, findImage, randomSwitchHub, findImas, findCheese, findBocchi, findCry, findKiss, findPunch };
+function booruColor() {
+	const ran = Math.floor(Math.random() * (10 - 1) + 1);
+
+	switch(ran) {
+	case 1:
+		return '#f30100';
+	case 2:
+		return '#a34afa';
+	case 3:
+		return '#f93b90';
+	case 4:
+		return '#fcb9d8';
+	case 5:
+		return '#cfebf7';
+	case 6:
+		return '#e39ed4';
+	case 7:
+		return '#f34b7f';
+	case 8:
+		return '#a8c0e6';
+	case 9:
+		return '#813a9a';
+	case 10:
+		return '#9B81BF';
+	}
+}
+
+module.exports = { findHug, title, color, payout, gambleRoll, gambleValue, findGif, findImage, randomSwitchHub, findImas, findCheese, findBocchi, findCry, findKiss, findPunch, booruColor };

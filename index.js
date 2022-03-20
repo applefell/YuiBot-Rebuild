@@ -1,12 +1,13 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 const Client = require('./client/Client');
-const { globalPrefix, token, mongoPass, owner } = require('./config.json');
+const { globalPrefix, token, mongoPass, owner, minLevelXP } = require('./config.json');
 const client = new Client();
 const { shopInit } = require('./models/shopinit');
 const online = true;
 client.chalk = require('chalk');
 const winston = require('winston');
+client.canvacord = require('canvacord');
 client.logger = winston.createLogger({
 	transports: [
 		new winston.transports.Console(),
@@ -97,7 +98,7 @@ client.on('message', async message => {
 		const potential_xp = Math.floor(Math.random() * (7 - 1) + 1);
 
 		// Gives users a chance of earning money on a message
-		if(ran >= 65) {
+		if(ran >= 61) {
 			client.Users.findOne({
 				user_id: message.author.id,
 			}, (err, data) => {
@@ -142,6 +143,25 @@ client.on('message', async message => {
 				if(Date.now() - data.xp_cooldown > 120000) {
 					data.xp += potential_xp;
 					data.xp_cooldown = Date.now();
+					data.save().catch(err => client.logger.log('error', client.chalk.redBright(err)));
+				} else {
+					return;
+				}
+			}
+		});
+
+		// Makes sure that levels are a thing :)
+		client.Users.findOne({
+			user_id: message.author.id,
+		}, (err, data) => {
+			if(err) client.logger.log('error', client.chalk.redBright(err));
+			if(!data) return;
+			if(data) {
+				const xp_modifier = data.level * 25;
+				const req_xp = minLevelXP + xp_modifier;
+				if(data.xp >= req_xp) {
+					data.xp -= req_xp;
+					data.level += 1;
 					data.save().catch(err => client.logger.log('error', client.chalk.redBright(err)));
 				} else {
 					return;

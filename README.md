@@ -1,17 +1,15 @@
 # YuiBot-Rebuild
 A rebuild of my original YuiBot discord bot but cool now :sunglasses:
 
-# NO LONGER GETTING UPDATED
-For more recent updates go to [YuiBot-v13](https://github.com/applefell/YuiBot-v13)
-
 # Requirements
-* Computer
+* 64-bit operating system
+* MongoDB account
 
 # Running the bot
 * unzip the .zip file the bot comes in
 * open a command prompt in the bots directory
 * run `npm install`
-* insert your bots token to `config.json`
+* insert your bots token, MongoDB connection string, Discord ID to `config.json`
 * run `node index`
 
 # Goals
@@ -22,6 +20,9 @@ For more recent updates go to [YuiBot-v13](https://github.com/applefell/YuiBot-v
 - [x] Improved image command
 - [ ] Add more moderation features (tempbans, mutes, etc)
 - [x] Search images from sites like safebooru
-- [x] Add levelling system
+- [ ] Add levelling system
 - [ ] Add integration to a website
 - [ ] Add support for sharding
+- [ ] Music commands (again)
+- [ ] Improved XP command
+- [ ] Make my own code to replace "booru"
